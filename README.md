@@ -4,7 +4,7 @@
 1. Open Control Panel.
 2. Click on Programs.
 3. Click the Turn Windows features on or off link.
-4. On Windows Features, check or clear the feature you want.
+4. Check "Windows Subsystem for Linux"
 5. Click OK to enable and disable the feature.
 6. Restart
 
@@ -141,3 +141,51 @@ After completing those Ubunto Terminal should apear on your start menu program l
 
 <mark> Do not modify or Edit the files on this loacation using any windows software because it may cause corupted file in WSL
 
+# Install wsl-2
+http://aka.ms/wsl2-install
+
+## Requirements
+* For x64 systems: Version 1903 or higher, with Build 18362 or higher.
+* For ARM64 systems: Version 2004 or higher, with Build 19041 or higher.
+* Builds lower than 18362 do not support WSL 2. Use the Windows Update Assistant to update your version of Windows.
+
+## Step 1 - Enable Windows feature
+1. Open Control Panel.
+2. Click on Programs.
+3. Click the Turn Windows features on or off link.
+4. Check "Windows Subsystem for Linux"
+5. Check "Virtual Machine feature"
+6. Click OK to enable and disable the feature.
+7. Restart
+
+**Or,**
+
+Open PowerShell as Administrator and run the following command
+```bash
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+### Step 2 - Download the Linux kernel update package
+* Download the latest package:
+https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+* Run the update package downloaded in the previous step. (Double-click to run - you will be prompted for elevated permissions, select ‘yes’ to approve this installation.)
+
+
+### Step 3 - Change previously WSL version
+
+* Check the WSL versions:
+
+```bash
+wsl -l -v
+```
+* Upgrade previously installed WSL
+```bash
+wsl --set-version <distribution name> <versionNumber>
+wsl --set-version kali-linux 2
+```
+* Set default for future WSL installations
+```bash
+wsl --set-default-version 2
+```
